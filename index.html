@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Yazy ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         /* --- ESTILOS GENERALES --- */
@@ -12,7 +12,7 @@
             --bg-color: #F9F7F2; /* Crema suave */
             --text-color: #5D5D5D; 
             --accent-color: #D4AF37; /* Dorado suave */
-            --heart-color: #E5B9B9; /* Rosa palo */
+            --btn-bg: #fff0f0; /* Rosita muy pálido para botones */
         }
 
         body {
@@ -20,25 +20,24 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Montserrat', sans-serif; /* Texto base legible */
+            font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Títulos en cursiva romántica */
         h1, h2, h3, .cursive-text {
             font-family: 'Great Vibes', cursive;
             font-weight: 400;
             color: #4A4A4A;
         }
 
-        /* --- FONDO ANIMADO (Corazones y Flores) --- */
+        /* --- FONDO ANIMADO --- */
         .falling-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Para que no estorben al click */
+            pointer-events: none;
             z-index: -1;
             overflow: hidden;
         }
@@ -46,7 +45,6 @@
         .falling-item {
             position: absolute;
             top: -10%;
-            font-size: 20px;
             opacity: 0.6;
             animation: fall linear infinite;
         }
@@ -89,7 +87,7 @@
         .click-text {
             margin-top: 10px;
             font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem; /* Letra grande cursiva */
+            font-size: 2.5rem;
             color: #666;
         }
 
@@ -115,7 +113,7 @@
         .hero-section { margin-bottom: 50px; padding-top: 20px; }
 
         .hero-title {
-            font-size: 4.5rem; /* Título muy grande cursiva */
+            font-size: 4.5rem;
             margin-bottom: 10px;
             line-height: 1.2;
         }
@@ -157,55 +155,63 @@
             width: 100%;
             height: auto;
             display: block;
-            filter: sepia(15%) contrast(90%); /* Toque vintage suave */
+            filter: sepia(15%) contrast(90%);
         }
 
-        /* --- AUDIOS --- */
+        /* --- SECCIÓN DE AUDIOS (NUEVO DISEÑO) --- */
         .audio-section {
             background-color: #fff;
-            padding: 40px;
-            border-radius: 15px; /* Bordes más redondeados */
-            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+            padding: 50px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             margin-bottom: 60px;
             border: 1px solid #f0e6d2;
         }
 
         .audio-title { font-size: 3rem; margin-bottom: 10px; color: var(--accent-color); }
 
-        .audio-container {
+        .big-buttons-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 50px;
+            gap: 40px;
+            margin-top: 30px;
         }
 
-        .audio-column h3 { font-size: 2.2rem; margin-bottom: 20px; }
-
-        .audio-btn-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .audio-btn {
-            background-color: var(--bg-color);
-            border: 1px solid #e6dec8;
-            padding: 12px 5px;
-            border-radius: 8px;
+        .big-audio-btn {
+            background-color: var(--btn-bg);
+            border: 2px solid #e6dec8;
+            padding: 20px 30px;
+            border-radius: 15px;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            transition: all 0.2s;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: #555;
+            transition: all 0.3s ease;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
-        .audio-btn:hover {
-            background-color: #fcebeb;
+        .big-audio-btn span {
+            font-size: 2rem;
+        }
+
+        .big-audio-btn:hover {
+            transform: translateY(-5px);
+            background-color: #ffe4e4;
             border-color: #dfa6a6;
-            color: #333;
+            box-shadow: 0 5px 15px rgba(223, 166, 166, 0.4);
         }
 
-        .audio-btn.playing {
+        .big-audio-btn:active {
+            transform: scale(0.98);
+        }
+
+        .big-audio-btn.playing {
             background-color: #dfa6a6;
             color: white;
             border-color: #dfa6a6;
@@ -241,19 +247,24 @@
 
         <section class="audio-section">
             <h2 class="audio-title">Radio Daniel FM 🎙️</h2>
-            <p style="font-family: 'Montserrat', sans-serif; font-style: italic;">(Si le das play, la música se pausa solita)</p>
-            <br>
-            <div class="audio-container">
-                <div class="audio-column">
-                    <h3>Chistes de señor de 41 🤡</h3>
-                    <div class="audio-btn-grid" id="chistes-container"></div>
-                </div>
+            <p style="font-family: 'Montserrat', sans-serif; font-style: italic;">
+                Presiona un botón y la magia sucede (aleatoriamente).
+            </p>
+            
+            <div class="big-buttons-container">
+                
+                <button class="big-audio-btn" id="btn-chiste" onclick="playRandomAudio('Chiste')">
+                    <span>🤡</span>
+                    Chiste de señor de 41
+                </button>
 
-                <div class="audio-column">
-                    <h3>Datos Random 🤓</h3>
-                    <div class="audio-btn-grid" id="datos-container"></div>
-                </div>
+                <button class="big-audio-btn" id="btn-dato" onclick="playRandomAudio('Dato')">
+                    <span>🤓</span>
+                    Dato Random
+                </button>
+
             </div>
+            <p id="now-playing-text" style="margin-top:20px; opacity:0; transition:opacity 0.5s; font-size:0.9rem;">Reproduciendo...</p>
         </section>
 
         <footer>
@@ -270,117 +281,143 @@
         const totalChistes = 9;    
         const totalDatos = 9;      
 
-        const bgAudio = document.getElementById('bg-music');
+        const bgMusic = document.getElementById('bg-music');
+        const bgVolume = 0.1; // Volumen objetivo de la música de fondo (10%)
         let currentVoiceNote = null; 
 
-        // 1. GENERAR FONDO ANIMADO (FLORES Y CORAZONES)
+        // 1. GENERAR FONDO ANIMADO
         const fallingContainer = document.getElementById('falling-bg');
-        const elements = ['🌸', '❤️', '✨', '🌸', '❤️']; // Elementos que caerán
+        const elements = ['🌸', '❤️', '✨', '🌸', '❤️']; 
 
         function createFallingElements() {
-            // Crear 30 elementos flotantes
-            for(let i=0; i<30; i++) {
+            for(let i=0; i<25; i++) {
                 const span = document.createElement('span');
                 span.classList.add('falling-item');
                 span.innerText = elements[Math.floor(Math.random() * elements.length)];
-                
-                // Posición y velocidad aleatoria
                 span.style.left = Math.random() * 100 + 'vw';
-                span.style.animationDuration = (Math.random() * 5 + 5) + 's'; // Entre 5 y 10s
+                span.style.animationDuration = (Math.random() * 5 + 6) + 's'; 
                 span.style.animationDelay = Math.random() * 5 + 's';
-                span.style.fontSize = (Math.random() * 20 + 10) + 'px'; // Tamaño variable
-                
+                span.style.fontSize = (Math.random() * 20 + 12) + 'px'; 
                 fallingContainer.appendChild(span);
             }
         }
         createFallingElements();
 
-        // 2. FUNCIÓN INICIAL
+        // 2. FUNCIÓN INICIAL (Música fondo)
         function startExperience() {
             const randomNum = Math.floor(Math.random() * totalCanciones) + 1;
-            bgAudio.src = `assets/music/cancion${randomNum}.mp3`;
+            bgMusic.src = `assets/music/cancion${randomNum}.mp3`;
+            bgMusic.volume = bgVolume; 
             
-            // --- VOLUMEN BAJO (10%) ---
-            bgAudio.volume = 0.1; 
-            
-            bgAudio.play().then(() => {
+            bgMusic.play().then(() => {
                 document.getElementById('welcome-screen').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('welcome-screen').style.display = 'none';
                     document.getElementById('main-content').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('main-content').style.opacity = '1';
-                    }, 100);
+                    setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 100);
                 }, 1000);
             }).catch(error => {
-                alert("Dale clic otra vez al corazón porfi.");
+                alert("Dale clic otra vez al corazón porfi (error de autoplay).");
             });
         }
 
-        // 3. GENERADOR DE GALERÍA (ARCHIVOS .JPG.JPEG)
+        // 3. GENERADOR DE GALERÍA (fotoX.jpg.jpeg)
         const galleryContainer = document.getElementById('gallery-container');
         for (let i = 1; i <= totalFotos; i++) {
             const div = document.createElement('div');
             div.className = 'polaroid';
             const img = document.createElement('img');
-            
-            // --- AQUÍ ESTÁ EL CAMBIO DE NOMBRE DE FOTO ---
             img.src = `assets/img/foto${i}.jpg.jpeg`; 
-            
             img.alt = `Recuerdo ${i}`;
             img.loading = "lazy";
             div.appendChild(img);
             galleryContainer.appendChild(div);
         }
 
-        // 4. GENERADOR DE BOTONES DE AUDIO
-        // Ahora acepta el formato (extension) como parámetro
-        function createAudioButtons(type, count, containerId, extension, labelPrefix) {
-            const container = document.getElementById(containerId);
-            for (let i = 1; i <= count; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'audio-btn';
-                btn.innerText = `${labelPrefix} ${i}`;
+        // 4. SISTEMA DE AUDIO (FADE IN / FADE OUT)
+        
+        // Función para cambiar volumen suavemente
+        function fadeAudio(audioElement, startVol, endVol, duration, callback) {
+            const steps = 20; // Número de pasitos para bajar el volumen
+            const intervalTime = duration / steps;
+            const volStep = (endVol - startVol) / steps;
+            let currentStep = 0;
+
+            const fadeInterval = setInterval(() => {
+                currentStep++;
+                let newVol = startVol + (volStep * currentStep);
                 
-                btn.onclick = function() {
-                    // Genera la ruta con la extensión correcta (.mp3 o .m4a)
-                    playVoiceNote(`assets/audio/${type}${i}${extension}`, btn);
-                };
-                container.appendChild(btn);
-            }
+                // Asegurar que no se salga de los límites 0 y 1
+                if (newVol < 0) newVol = 0;
+                if (newVol > 1) newVol = 1;
+                
+                audioElement.volume = newVol;
+
+                if (currentStep >= steps) {
+                    clearInterval(fadeInterval);
+                    if (callback) callback();
+                }
+            }, intervalTime);
         }
 
-        // Crear botones de Chistes (mp3) con etiqueta "Chiste"
-        // NOTA: Asumimos que los chistes siguen siendo MP3. Si también son m4a, cambia '.mp3' por '.m4a' abajo.
-        createAudioButtons('chiste', totalChistes, 'chistes-container', '.mp3', 'Chiste');
-
-        // Crear botones de Datos (.m4a) con etiqueta "Dato"
-        createAudioButtons('dato', totalDatos, 'datos-container', '.m4a', 'Dato');
-
-        // 5. LÓGICA DE REPRODUCCIÓN
-        function playVoiceNote(src, btnElement) {
-            if (currentVoiceNote) {
-                currentVoiceNote.pause();
-                currentVoiceNote = null;
-                document.querySelectorAll('.audio-btn').forEach(b => b.classList.remove('playing'));
-            }
-
-            bgAudio.pause(); // Pausar música fondo
-
-            const audio = new Audio(src);
-            currentVoiceNote = audio;
-            // Volumen de la voz al 100% para que se escuche bien sobre el silencio
-            audio.volume = 1.0; 
+        // Función principal para reproducir random
+        function playRandomAudio(type) {
+            // type es "Chiste" o "Dato" (Mayúscula inicial importante para el archivo)
             
-            btnElement.classList.add('playing');
-            audio.play();
+            // 1. Si ya hay una voz sonando, no hacemos nada o la paramos
+            if (currentVoiceNote) return; 
 
-            audio.onended = function() {
+            // 2. Elegir número random
+            const max = (type === 'Chiste') ? totalChistes : totalDatos;
+            const randomId = Math.floor(Math.random() * max) + 1;
+            
+            // Nombre del archivo: Dato1.m4a o Chiste5.m4a
+            const src = `assets/audio/${type}${randomId}.m4a`;
+
+            const btnId = (type === 'Chiste') ? 'btn-chiste' : 'btn-dato';
+            const btnElement = document.getElementById(btnId);
+            const statusText = document.getElementById('now-playing-text');
+
+            // 3. Crear el audio de la voz
+            const voiceAudio = new Audio(src);
+            voiceAudio.volume = 1.0; // Voz fuerte
+
+            // 4. SECUENCIA DE REPRODUCCIÓN (FADE OUT MÚSICA -> PLAY VOZ -> FADE IN MÚSICA)
+            
+            // Paso A: Bajar música de fondo (Fade Out) en 1 segundo
+            fadeAudio(bgMusic, bgVolume, 0, 1000, () => {
+                
+                // Cuando el volumen llega a 0, pausamos la música fondo
+                bgMusic.pause();
+                
+                // Paso B: Reproducir la nota de voz
+                currentVoiceNote = voiceAudio;
+                btnElement.classList.add('playing');
+                statusText.innerText = `Reproduciendo: ${type} #${randomId} 🔊`;
+                statusText.style.opacity = 1;
+
+                voiceAudio.play().catch(e => {
+                    alert("No se encontró el audio: " + src);
+                    resetAudioState();
+                });
+
+                // Paso C: Cuando termina la voz
+                voiceAudio.onended = function() {
+                    resetAudioState();
+                };
+            });
+
+            function resetAudioState() {
                 btnElement.classList.remove('playing');
-                bgAudio.play(); // Regresa la música suave
+                statusText.style.opacity = 0;
                 currentVoiceNote = null;
-            };
+
+                // Paso D: Volver a prender música fondo y subir volumen (Fade In)
+                bgMusic.play();
+                fadeAudio(bgMusic, 0, bgVolume, 2000); // Subir suave en 2 segundos
+            }
         }
+
     </script>
 </body>
 </html>
