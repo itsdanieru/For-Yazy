@@ -22,6 +22,9 @@
             color: var(--text-color);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            /* Evitar selección de texto para que parezca app */
+            user-select: none; 
+            -webkit-user-select: none;
         }
 
         h1, h2, h3, .cursive-text {
@@ -54,7 +57,7 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- PANTALLA DE BIENVENIDA (MODIFICADA) --- */
+        /* --- PANTALLA DE BIENVENIDA (CLICKABLE COMPLETA) --- */
         #welcome-screen {
             position: fixed;
             top: 0;
@@ -70,36 +73,34 @@
             transition: opacity 1s ease;
             padding: 20px;
             text-align: center;
+            cursor: pointer; /* Manita para indicar que es clickable */
         }
 
         .welcome-title {
-            font-size: 4rem;
-            color: #d45d79; /* Un rosa más intenso para el título */
+            font-size: 3.5rem; /* Ajustado para móviles */
+            color: #d45d79; 
             margin-bottom: 20px;
             line-height: 1.1;
         }
 
         .welcome-msg {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             max-width: 600px;
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: #555;
         }
 
         .heart-btn {
             font-size: 60px;
-            cursor: pointer;
             animation: latido 1.5s infinite;
             background: none;
             border: none;
             outline: none;
             color: #dfa6a6;
-            transition: transform 0.3s;
+            pointer-events: none; /* El click lo recibe el div padre */
         }
-
-        .heart-btn:hover { color: #c96f6f; }
 
         .click-text {
             margin-top: 10px;
@@ -128,62 +129,42 @@
         }
 
         .hero-section { margin-bottom: 50px; padding-top: 20px; }
-        .hero-title { font-size: 4.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .hero-title { font-size: 4rem; margin-bottom: 10px; line-height: 1.2; }
         .hero-subtitle { font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto; }
 
-        /* --- POLAROIDS DINÁMICAS (NUEVO) --- */
+        /* --- POLAROIDS DINÁMICAS --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 40px; /* Más espacio para que se muevan */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px; 
             margin-bottom: 80px;
-            padding: 20px;
+            padding: 10px;
         }
 
         .polaroid {
             background: white;
-            padding: 12px 12px 45px 12px;
+            padding: 10px 10px 40px 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             border-radius: 2px;
             transition: all 0.4s ease;
-            /* Animación de flotar */
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Definimos la animación de flotar */
         @keyframes float {
             0% { transform: translateY(0px) rotate(var(--rot)); }
             50% { transform: translateY(-10px) rotate(var(--rot)); }
             100% { transform: translateY(0px) rotate(var(--rot)); }
         }
 
-        /* VARIACIONES PARA QUE NO SEAN IGUALES */
-        /* Foto 1, 4, 7... */
-        .polaroid:nth-child(3n+1) { 
-            --rot: -3deg; 
-            animation-duration: 5s; 
-            transform: scale(0.95) rotate(-3deg); /* Un poco más chicas */
-        }
-        /* Foto 2, 5, 8... */
-        .polaroid:nth-child(3n+2) { 
-            --rot: 2deg; 
-            animation-duration: 7s; /* Velocidad diferente */
-            transform: scale(1.05) rotate(2deg); /* Un poco más grandes */
-        }
-        /* Foto 3, 6, 9... */
-        .polaroid:nth-child(3n+3) { 
-            --rot: 4deg; 
-            animation-duration: 6s;
-            transform: rotate(4deg); /* Tamaño normal */
-        }
+        .polaroid:nth-child(3n+1) { --rot: -3deg; animation-duration: 5s; transform: scale(0.95) rotate(-3deg); }
+        .polaroid:nth-child(3n+2) { --rot: 2deg; animation-duration: 7s; transform: scale(1.05) rotate(2deg); }
+        .polaroid:nth-child(3n+3) { --rot: 4deg; animation-duration: 6s; transform: rotate(4deg); }
 
-        /* Al pasar el mouse se detiene y se endereza */
         .polaroid:hover {
             animation-play-state: paused;
             transform: scale(1.15) rotate(0deg) !important;
             box-shadow: 0 20px 40px rgba(0,0,0,0.25);
             z-index: 100;
-            cursor: pointer;
         }
 
         .polaroid img {
@@ -196,38 +177,41 @@
         /* --- AUDIO SECTION --- */
         .audio-section {
             background-color: #fff;
-            padding: 50px 30px;
+            padding: 40px 20px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             margin-bottom: 60px;
             border: 1px solid #f0e6d2;
         }
-        .audio-title { font-size: 3rem; margin-bottom: 10px; color: var(--accent-color); }
+        .audio-title { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent-color); }
 
         .big-buttons-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             margin-top: 30px;
         }
 
         .big-audio-btn {
             background-color: var(--btn-bg);
             border: 2px solid #e6dec8;
-            padding: 20px 30px;
+            padding: 20px;
             border-radius: 15px;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #555;
             transition: all 0.3s ease;
-            min-width: 250px;
+            min-width: 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            /* Evitar que el clic en el botón se propague raro */
+            position: relative; 
+            z-index: 10;
         }
         .big-audio-btn span { font-size: 2rem; }
         
@@ -244,14 +228,14 @@
         }
 
         footer { margin-top: 50px; padding-bottom: 30px; font-size: 0.9rem; opacity: 0.8; }
-        .signature { font-family: 'Great Vibes', cursive; font-size: 2rem; margin-top: 10px; display: block;}
+        .signature { font-family: 'Great Vibes', cursive; font-size: 1.8rem; margin-top: 10px; display: block;}
     </style>
 </head>
 <body>
 
     <div class="falling-container" id="falling-bg"></div>
 
-    <div id="welcome-screen">
+    <div id="welcome-screen" onclick="startExperience()">
         <h1 class="welcome-title">Hola, Mi Dulce Princesa</h1>
         <p class="welcome-msg">
             Este es mi último regalo para ti. De momento no soy super pro programando, 
@@ -260,7 +244,7 @@
             <strong>Te Amo ❤️‍🩹</strong>
         </p>
         
-        <button class="heart-btn" onclick="startExperience()">❤️</button>
+        <div class="heart-btn">❤️</div>
         <p class="click-text">Tócame para empezar</p>
     </div>
 
@@ -285,11 +269,11 @@
             </p>
             
             <div class="big-buttons-container">
-                <button class="big-audio-btn" id="btn-chiste" onclick="playRandomAudio('Chiste')">
+                <button class="big-audio-btn" id="btn-chiste" onclick="event.stopPropagation(); playRandomAudio('Chiste')">
                     <span>🤡</span>
                     Chiste de señor de 41
                 </button>
-                <button class="big-audio-btn" id="btn-dato" onclick="playRandomAudio('Dato')">
+                <button class="big-audio-btn" id="btn-dato" onclick="event.stopPropagation(); playRandomAudio('Dato')">
                     <span>🤓</span>
                     Dato Random
                 </button>
@@ -312,8 +296,9 @@
         const totalDatos = 9;      
 
         const bgMusic = document.getElementById('bg-music');
-        const bgVolume = 0.1; // Volumen 10%
+        const bgVolume = 0.1; // Volumen bajito (10%)
         let currentVoiceNote = null; 
+        let experienceStarted = false; // Candado para que no se inicie doble
 
         // 1. GENERAR FONDO
         const fallingContainer = document.getElementById('falling-bg');
@@ -331,13 +316,24 @@
         }
         createFallingElements();
 
-        // 2. INICIO
+        // 2. INICIO (Click en cualquier parte de la pantalla inicial)
         function startExperience() {
+            if (experienceStarted) return; // Evitar doble click
+            
             const randomNum = Math.floor(Math.random() * totalCanciones) + 1;
-            bgMusic.src = `assets/music/cancion${randomNum}.mp3`;
+            
+            // --- AQUÍ ESTÁ EL ERROR COMÚN: EL NOMBRE DEL ARCHIVO ---
+            // Asumo que están en minúsculas 'cancion1.mp3'. 
+            // Si las subiste como 'Cancion1.mp3', el código de abajo te avisará.
+            const songPath = `assets/music/cancion${randomNum}.mp3`;
+            
+            bgMusic.src = songPath;
             bgMusic.volume = bgVolume; 
             
+            // Intentar reproducir
             bgMusic.play().then(() => {
+                experienceStarted = true;
+                // Transición
                 document.getElementById('welcome-screen').style.opacity = '0';
                 setTimeout(() => {
                     document.getElementById('welcome-screen').style.display = 'none';
@@ -345,4 +341,91 @@
                     setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 100);
                 }, 1000);
             }).catch(error => {
-                alert("Dale clic otra vez al corazón porfi (error de
+                console.error(error);
+                // ALERTA DE AYUDA PARA TI
+                alert(`⚠️ NO SE PUDO REPRODUCIR LA MÚSICA.\n\nEl navegador buscó este archivo:\n${songPath}\n\nRevisa en tu GitHub (carpeta assets/music) si el archivo existe y si está escrito EXACTAMENTE igual (minúsculas/mayúsculas).`);
+            });
+        }
+
+        // 3. GALERÍA
+        const galleryContainer = document.getElementById('gallery-container');
+        for (let i = 1; i <= totalFotos; i++) {
+            const div = document.createElement('div');
+            div.className = 'polaroid';
+            const randomRot = (Math.random() * 6 - 3).toFixed(1) + 'deg';
+            div.style.setProperty('--rot', randomRot);
+
+            const img = document.createElement('img');
+            img.src = `assets/img/foto${i}.jpg.jpeg`; 
+            img.alt = `Recuerdo ${i}`;
+            img.loading = "lazy";
+            div.appendChild(img);
+            galleryContainer.appendChild(div);
+        }
+
+        // 4. AUDIO SYSTEM
+        function fadeAudio(audioElement, startVol, endVol, duration, callback) {
+            const steps = 20; 
+            const intervalTime = duration / steps;
+            const volStep = (endVol - startVol) / steps;
+            let currentStep = 0;
+
+            const fadeInterval = setInterval(() => {
+                currentStep++;
+                let newVol = startVol + (volStep * currentStep);
+                if (newVol < 0) newVol = 0;
+                if (newVol > 1) newVol = 1;
+                audioElement.volume = newVol;
+
+                if (currentStep >= steps) {
+                    clearInterval(fadeInterval);
+                    if (callback) callback();
+                }
+            }, intervalTime);
+        }
+
+        function playRandomAudio(type) {
+            if (currentVoiceNote) return; 
+
+            const max = (type === 'Chiste') ? totalChistes : totalDatos;
+            const randomId = Math.floor(Math.random() * max) + 1;
+            
+            // Archivos .m4a con Mayúscula inicial (Chiste1.m4a)
+            const src = `assets/audio/${type}${randomId}.m4a`;
+
+            const btnId = (type === 'Chiste') ? 'btn-chiste' : 'btn-dato';
+            const btnElement = document.getElementById(btnId);
+            const statusText = document.getElementById('now-playing-text');
+            
+            const voiceAudio = new Audio(src);
+            voiceAudio.volume = 1.0; 
+
+            fadeAudio(bgMusic, bgVolume, 0, 1000, () => {
+                bgMusic.pause();
+                
+                currentVoiceNote = voiceAudio;
+                btnElement.classList.add('playing');
+                statusText.innerText = `Reproduciendo: ${type} #${randomId} 🔊`;
+                statusText.style.opacity = 1;
+
+                voiceAudio.play().catch(e => {
+                    alert(`⚠️ ERROR: No encontré el audio.\nBuscaba: ${src}\nRevisa mayúsculas/minúsculas en GitHub.`);
+                    resetAudioState();
+                });
+
+                voiceAudio.onended = function() {
+                    resetAudioState();
+                };
+            });
+
+            function resetAudioState() {
+                btnElement.classList.remove('playing');
+                statusText.style.opacity = 0;
+                currentVoiceNote = null;
+                bgMusic.play();
+                fadeAudio(bgMusic, 0, bgVolume, 2000); 
+            }
+        }
+    </script>
+</body>
+</html>
