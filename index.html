@@ -9,10 +9,10 @@
     <style>
         /* --- ESTILOS GENERALES --- */
         :root {
-            --bg-color: #F9F7F2; /* Crema suave */
+            --bg-color: #F9F7F2; 
             --text-color: #5D5D5D; 
-            --accent-color: #D4AF37; /* Dorado suave */
-            --btn-bg: #fff0f0; /* Rosita muy pálido para botones */
+            --accent-color: #D4AF37; 
+            --btn-bg: #fff0f0; 
         }
 
         body {
@@ -51,11 +51,10 @@
 
         @keyframes fall {
             0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.7; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- PANTALLA DE BIENVENIDA --- */
+        /* --- PANTALLA DE BIENVENIDA (MODIFICADA) --- */
         #welcome-screen {
             position: fixed;
             top: 0;
@@ -69,10 +68,28 @@
             align-items: center;
             z-index: 1000;
             transition: opacity 1s ease;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 4rem;
+            color: #d45d79; /* Un rosa más intenso para el título */
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .welcome-msg {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #555;
         }
 
         .heart-btn {
-            font-size: 90px;
+            font-size: 60px;
             cursor: pointer;
             animation: latido 1.5s infinite;
             background: none;
@@ -87,8 +104,8 @@
         .click-text {
             margin-top: 10px;
             font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: #666;
+            font-size: 2rem;
+            color: #888;
         }
 
         @keyframes latido {
@@ -111,44 +128,62 @@
         }
 
         .hero-section { margin-bottom: 50px; padding-top: 20px; }
+        .hero-title { font-size: 4.5rem; margin-bottom: 10px; line-height: 1.2; }
+        .hero-subtitle { font-size: 1.1rem; line-height: 1.6; max-width: 600px; margin: 0 auto; }
 
-        .hero-title {
-            font-size: 4.5rem;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* --- POLAROIDS --- */
+        /* --- POLAROIDS DINÁMICAS (NUEVO) --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 35px;
+            gap: 40px; /* Más espacio para que se muevan */
             margin-bottom: 80px;
+            padding: 20px;
         }
 
         .polaroid {
             background: white;
             padding: 12px 12px 45px 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transform: rotate(-2deg);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 2px;
             transition: all 0.4s ease;
-            border-radius: 3px;
+            /* Animación de flotar */
+            animation: float 6s ease-in-out infinite;
         }
 
-        .polaroid:nth-child(even) { transform: rotate(2deg); }
-        .polaroid:nth-child(3n) { transform: rotate(-1deg); }
+        /* Definimos la animación de flotar */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(var(--rot)); }
+            50% { transform: translateY(-10px) rotate(var(--rot)); }
+            100% { transform: translateY(0px) rotate(var(--rot)); }
+        }
 
+        /* VARIACIONES PARA QUE NO SEAN IGUALES */
+        /* Foto 1, 4, 7... */
+        .polaroid:nth-child(3n+1) { 
+            --rot: -3deg; 
+            animation-duration: 5s; 
+            transform: scale(0.95) rotate(-3deg); /* Un poco más chicas */
+        }
+        /* Foto 2, 5, 8... */
+        .polaroid:nth-child(3n+2) { 
+            --rot: 2deg; 
+            animation-duration: 7s; /* Velocidad diferente */
+            transform: scale(1.05) rotate(2deg); /* Un poco más grandes */
+        }
+        /* Foto 3, 6, 9... */
+        .polaroid:nth-child(3n+3) { 
+            --rot: 4deg; 
+            animation-duration: 6s;
+            transform: rotate(4deg); /* Tamaño normal */
+        }
+
+        /* Al pasar el mouse se detiene y se endereza */
         .polaroid:hover {
-            transform: scale(1.1) rotate(0deg) !important;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            z-index: 50;
+            animation-play-state: paused;
+            transform: scale(1.15) rotate(0deg) !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            z-index: 100;
+            cursor: pointer;
         }
 
         .polaroid img {
@@ -158,7 +193,7 @@
             filter: sepia(15%) contrast(90%);
         }
 
-        /* --- SECCIÓN DE AUDIOS (NUEVO DISEÑO) --- */
+        /* --- AUDIO SECTION --- */
         .audio-section {
             background-color: #fff;
             padding: 50px 30px;
@@ -167,7 +202,6 @@
             margin-bottom: 60px;
             border: 1px solid #f0e6d2;
         }
-
         .audio-title { font-size: 3rem; margin-bottom: 10px; color: var(--accent-color); }
 
         .big-buttons-container {
@@ -195,22 +229,13 @@
             align-items: center;
             gap: 10px;
         }
-
-        .big-audio-btn span {
-            font-size: 2rem;
-        }
-
+        .big-audio-btn span { font-size: 2rem; }
+        
         .big-audio-btn:hover {
             transform: translateY(-5px);
             background-color: #ffe4e4;
             border-color: #dfa6a6;
-            box-shadow: 0 5px 15px rgba(223, 166, 166, 0.4);
         }
-
-        .big-audio-btn:active {
-            transform: scale(0.98);
-        }
-
         .big-audio-btn.playing {
             background-color: #dfa6a6;
             color: white;
@@ -227,6 +252,14 @@
     <div class="falling-container" id="falling-bg"></div>
 
     <div id="welcome-screen">
+        <h1 class="welcome-title">Hola, Mi Dulce Princesa</h1>
+        <p class="welcome-msg">
+            Este es mi último regalo para ti. De momento no soy super pro programando, 
+            pero mientras vaya aprendiendo más cosas iré mejorando y añadiendo aún más y más cosas a esta página. 
+            Esto fue diseñado especialmente para ti.<br><br>
+            <strong>Te Amo ❤️‍🩹</strong>
+        </p>
+        
         <button class="heart-btn" onclick="startExperience()">❤️</button>
         <p class="click-text">Tócame para empezar</p>
     </div>
@@ -252,17 +285,14 @@
             </p>
             
             <div class="big-buttons-container">
-                
                 <button class="big-audio-btn" id="btn-chiste" onclick="playRandomAudio('Chiste')">
                     <span>🤡</span>
                     Chiste de señor de 41
                 </button>
-
                 <button class="big-audio-btn" id="btn-dato" onclick="playRandomAudio('Dato')">
                     <span>🤓</span>
                     Dato Random
                 </button>
-
             </div>
             <p id="now-playing-text" style="margin-top:20px; opacity:0; transition:opacity 0.5s; font-size:0.9rem;">Reproduciendo...</p>
         </section>
@@ -282,13 +312,12 @@
         const totalDatos = 9;      
 
         const bgMusic = document.getElementById('bg-music');
-        const bgVolume = 0.1; // Volumen objetivo de la música de fondo (10%)
+        const bgVolume = 0.1; // Volumen 10%
         let currentVoiceNote = null; 
 
-        // 1. GENERAR FONDO ANIMADO
+        // 1. GENERAR FONDO
         const fallingContainer = document.getElementById('falling-bg');
         const elements = ['🌸', '❤️', '✨', '🌸', '❤️']; 
-
         function createFallingElements() {
             for(let i=0; i<25; i++) {
                 const span = document.createElement('span');
@@ -296,14 +325,13 @@
                 span.innerText = elements[Math.floor(Math.random() * elements.length)];
                 span.style.left = Math.random() * 100 + 'vw';
                 span.style.animationDuration = (Math.random() * 5 + 6) + 's'; 
-                span.style.animationDelay = Math.random() * 5 + 's';
                 span.style.fontSize = (Math.random() * 20 + 12) + 'px'; 
                 fallingContainer.appendChild(span);
             }
         }
         createFallingElements();
 
-        // 2. FUNCIÓN INICIAL (Música fondo)
+        // 2. INICIO
         function startExperience() {
             const randomNum = Math.floor(Math.random() * totalCanciones) + 1;
             bgMusic.src = `assets/music/cancion${randomNum}.mp3`;
@@ -317,107 +345,4 @@
                     setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 100);
                 }, 1000);
             }).catch(error => {
-                alert("Dale clic otra vez al corazón porfi (error de autoplay).");
-            });
-        }
-
-        // 3. GENERADOR DE GALERÍA (fotoX.jpg.jpeg)
-        const galleryContainer = document.getElementById('gallery-container');
-        for (let i = 1; i <= totalFotos; i++) {
-            const div = document.createElement('div');
-            div.className = 'polaroid';
-            const img = document.createElement('img');
-            img.src = `assets/img/foto${i}.jpg.jpeg`; 
-            img.alt = `Recuerdo ${i}`;
-            img.loading = "lazy";
-            div.appendChild(img);
-            galleryContainer.appendChild(div);
-        }
-
-        // 4. SISTEMA DE AUDIO (FADE IN / FADE OUT)
-        
-        // Función para cambiar volumen suavemente
-        function fadeAudio(audioElement, startVol, endVol, duration, callback) {
-            const steps = 20; // Número de pasitos para bajar el volumen
-            const intervalTime = duration / steps;
-            const volStep = (endVol - startVol) / steps;
-            let currentStep = 0;
-
-            const fadeInterval = setInterval(() => {
-                currentStep++;
-                let newVol = startVol + (volStep * currentStep);
-                
-                // Asegurar que no se salga de los límites 0 y 1
-                if (newVol < 0) newVol = 0;
-                if (newVol > 1) newVol = 1;
-                
-                audioElement.volume = newVol;
-
-                if (currentStep >= steps) {
-                    clearInterval(fadeInterval);
-                    if (callback) callback();
-                }
-            }, intervalTime);
-        }
-
-        // Función principal para reproducir random
-        function playRandomAudio(type) {
-            // type es "Chiste" o "Dato" (Mayúscula inicial importante para el archivo)
-            
-            // 1. Si ya hay una voz sonando, no hacemos nada o la paramos
-            if (currentVoiceNote) return; 
-
-            // 2. Elegir número random
-            const max = (type === 'Chiste') ? totalChistes : totalDatos;
-            const randomId = Math.floor(Math.random() * max) + 1;
-            
-            // Nombre del archivo: Dato1.m4a o Chiste5.m4a
-            const src = `assets/audio/${type}${randomId}.m4a`;
-
-            const btnId = (type === 'Chiste') ? 'btn-chiste' : 'btn-dato';
-            const btnElement = document.getElementById(btnId);
-            const statusText = document.getElementById('now-playing-text');
-
-            // 3. Crear el audio de la voz
-            const voiceAudio = new Audio(src);
-            voiceAudio.volume = 1.0; // Voz fuerte
-
-            // 4. SECUENCIA DE REPRODUCCIÓN (FADE OUT MÚSICA -> PLAY VOZ -> FADE IN MÚSICA)
-            
-            // Paso A: Bajar música de fondo (Fade Out) en 1 segundo
-            fadeAudio(bgMusic, bgVolume, 0, 1000, () => {
-                
-                // Cuando el volumen llega a 0, pausamos la música fondo
-                bgMusic.pause();
-                
-                // Paso B: Reproducir la nota de voz
-                currentVoiceNote = voiceAudio;
-                btnElement.classList.add('playing');
-                statusText.innerText = `Reproduciendo: ${type} #${randomId} 🔊`;
-                statusText.style.opacity = 1;
-
-                voiceAudio.play().catch(e => {
-                    alert("No se encontró el audio: " + src);
-                    resetAudioState();
-                });
-
-                // Paso C: Cuando termina la voz
-                voiceAudio.onended = function() {
-                    resetAudioState();
-                };
-            });
-
-            function resetAudioState() {
-                btnElement.classList.remove('playing');
-                statusText.style.opacity = 0;
-                currentVoiceNote = null;
-
-                // Paso D: Volver a prender música fondo y subir volumen (Fade In)
-                bgMusic.play();
-                fadeAudio(bgMusic, 0, bgVolume, 2000); // Subir suave en 2 segundos
-            }
-        }
-
-    </script>
-</body>
-</html>
+                alert("Dale clic otra vez al corazón porfi (error de
